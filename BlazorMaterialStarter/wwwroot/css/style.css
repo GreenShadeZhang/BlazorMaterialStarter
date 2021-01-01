@@ -1,0 +1,115 @@
+﻿
+html, body {
+    /*font-family: HelveticaNeue, "Helvetica Neue", Helvetica, Arial, sans-serif !important;*/
+    font-family: 'Roboto';
+    /*font-size: 22px;*/
+    margin: 0px;
+}
+
+
+app {
+    display: flex;
+    position: relative;
+}
+
+.content-background {
+    width: 100vw;
+    background-color: var(--mdc-theme-background);
+    text-align: center;
+}
+
+.content-container {
+    display: inline-block;
+    /*max-width: 1080px;*/
+    color: var(--mdc-theme-on-surface) !important;
+}
+
+
+
+/*@media (max-width: 767.98px) {
+    .content-container {
+        padding: 10px;
+    }
+}*/
+
+
+
+
+
+
+
+
+.mdc-top-app-bar--fixed-adjust {
+    display: flex;
+}
+
+/*Fix drawer color*/
+.mdc-drawer {
+    /*background-color: var(--mdc-theme-surface);*/
+    background-color: var(--mdc-theme-background);
+}
+
+/*Fix nav menu text color*/
+.mdc-nav-item {
+    color: var(--mdc-theme-on-surface) !important;
+}
+
+.mdc-list-divider {
+    background-color: var(--mdc-theme-on-surface) !important;
+}
+
+.mdc-sub-menu-icon {
+    color: var(--mdc-theme-on-surface) !important;
+}
+
+
+/*Fix dialog text color*/
+.mdc-dialog .mdc-dialog__title {
+    color: var(--mdc-theme-on-surface);
+}
+
+/*Fix text field text color*/
+/*.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
+    color: rgb(96, 169, 44);
+}*/
+.mdc-floating-label--float-above {
+    color: var(--mdc-theme-primary) !important;
+}
+
+/*Fix form label text color*/
+.mdc-form-field > label {
+    color: var(--mdc-theme-on-surface) !important;
+}
+
+
+
+/*Fix radio color*/
+/*.mdc-radio__native-control {
+    color: var(--mdc-theme-on-surface) !important;
+    background-color: var(--mdc-theme-on-surface) !important;
+    border-color: var(--mdc-theme-on-surface) !important;
+}
+.mdc-radio .mdc-radio__native-control {
+    color: var(--mdc-theme-on-surface) !important;
+    background-color: var(--mdc-theme-on-surface) !important;
+    border-color: var(--mdc-theme-on-surface) !important;
+}*/
+
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }

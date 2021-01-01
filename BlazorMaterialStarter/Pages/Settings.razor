@@ -1,0 +1,156 @@
+﻿@page "/settings"
+
+
+<div class="mat-layout-grid">
+    <div class="mat-layout-grid-inner">
+        <MatH5 Style="text-align:left;">设置</MatH5>
+    </div>
+</div>
+<div class="mat-layout-grid">
+   
+    <div class="mat-layout-grid-inner">
+        <MatSelect Label="语言" @bind-Value="value1">
+            <MatOptionString Value="zh-cn">中文</MatOptionString>
+            <MatOptionString Value="en-us">en</MatOptionString>
+        </MatSelect>
+    </div>
+    <div>
+    </div>
+</div>
+<div class="mat-layout-grid">
+    <div class="mat-layout-grid-inner">
+        <MatSelect Label="颜色主题" ValueChanged="((string theme)=>ThemeChangeHandler(theme))">
+            @foreach (var theme in Themes)
+            {
+                <MatOption Value="theme.Key">@theme.Value</MatOption>
+            }
+        </MatSelect>
+    </div>
+</div>
+@code {
+    [CascadingParameter]
+    public MatTheme CurrentTheme { get; set; }
+    string value1;
+
+    private Dictionary<string, string> Themes = new Dictionary<string, string>
+    {
+        {"Standaard","标准" },
+         {"Donker","紫色" },
+          {"Blauw","蓝色" },
+           {"Groen","绿色" },
+            {"Rood","红色" },
+            {"Grijs","灰色" },
+    };
+    void ThemeChangeHandler(string selectedTheme)
+    {
+        MatTheme newTheme = new MatTheme();
+        switch (selectedTheme)
+        {
+            case "Standaard":
+                newTheme = DefaultTheme;
+                break;
+            case "Donker":
+                newTheme = DarkTheme;
+                break;
+            case "Blauw":
+                newTheme = BlueTheme;
+                break;
+            case "Groen":
+                newTheme = GreenTheme;
+                break;
+            case "Rood":
+                newTheme = RedTheme;
+                break;
+            case "Grijs":
+                newTheme = GreyTheme;
+                break;
+
+            default:
+                break;
+        }
+
+        //this.StateHasChanged();
+
+
+        //copy whole class doesn't work
+        CurrentTheme.Primary = newTheme.Primary;
+        CurrentTheme.Secondary = newTheme.Secondary;
+        CurrentTheme.Background = newTheme.Background;
+        CurrentTheme.Surface = newTheme.Surface;
+        CurrentTheme.OnPrimary = newTheme.OnPrimary;
+        CurrentTheme.OnSecondary = newTheme.OnSecondary;
+        CurrentTheme.OnSurface = newTheme.OnSurface;
+
+        CurrentTheme.ThemeHasChanged();
+    }
+
+    MatTheme DefaultTheme = new MatTheme()
+    {
+        Primary = "#1a237e",
+        Secondary = "#0288d1",
+        Background = "#FFFFFF",
+        Surface = "#FFFFFF",
+        OnPrimary = "#FFFFFF",
+        OnSecondary = "#000000",
+        OnSurface = "#000000"
+    };
+
+
+    MatTheme DarkTheme = new MatTheme()
+    {
+        Primary = "#BB86FC",
+        Secondary = "#03DAC6",
+        Background = "#121212",
+        //Surface = "#121212",
+        Surface = "#404040",
+        OnPrimary = "#000000",
+        OnSecondary = "#000000",
+        OnSurface = "#FFFFFF"
+    };
+
+    //https://saruwakakun.com/en/material-color
+
+    MatTheme BlueTheme = new MatTheme()
+    {
+        Primary = "#2196F3",
+        Secondary = "#EF5350",
+        Background = "#FFFFFF",
+        Surface = "#FFFFFF",
+        OnPrimary = "#000000",
+        OnSecondary = "#000000",
+        OnSurface = "#000000"
+    };
+
+    MatTheme GreenTheme = new MatTheme()
+    {
+        Primary = "#4CAF50",
+        Secondary = "#FFC107",
+        Background = "#FFFFFF",
+        Surface = "#FFFFFF",
+        OnPrimary = "#000000",
+        OnSecondary = "#000000",
+        OnSurface = "#000000"
+    };
+
+    MatTheme RedTheme = new MatTheme()
+    {
+        Primary = "#F44336",
+        Secondary = "#FFA726",
+        Background = "#FFFFFF",
+        Surface = "#FFFFFF",
+        OnPrimary = "#000000",
+        OnSecondary = "#000000",
+        OnSurface = "#000000"
+    };
+
+    MatTheme GreyTheme = new MatTheme()
+    {
+        Primary = "#607D8B",
+        Secondary = "#FDD835",
+        Background = "#FFFFFF",
+        Surface = "#FFFFFF",
+        OnPrimary = "#000000",
+        OnSecondary = "#000000",
+        OnSurface = "#000000"
+    };
+}

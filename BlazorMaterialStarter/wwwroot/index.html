@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>BlazorMaterialStarter</title>
+    <base href="/" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="_content/MatBlazor/dist/matBlazor.css" rel="stylesheet" />
+
+    <link rel="icon" type="image/png" href="./assets/logo.png">
+    <style type="text/css">
+        body, html {
+            height: 100%;
+        }
+
+        .app-root.app-loading {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+            .app-root .app-loading .spinner {
+                height: 200px;
+                width: 200px;
+                animation: rotate 2s linear infinite;
+                transform-origin: center center;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+            }
+
+                .app-root .app-loading .spinner .path {
+                    stroke-dasharray: 1, 200;
+                    stroke-dashoffset: 0;
+                    animation: dash 1.5s ease-in-out infinite;
+                    stroke-linecap: round;
+                    stroke: #ddd;
+                }
+
+        @keyframes rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes dash {
+            0% {
+                stroke-dasharray: 1, 200;
+                stroke-dashoffset: 0;
+            }
+
+            50% {
+                stroke-dasharray: 89, 200;
+                stroke-dashoffset: -35px;
+            }
+
+            100% {
+                stroke-dasharray: 89, 200;
+                stroke-dashoffset: -124px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="app-root">
+        <div class="app-loading">
+            <div class="logo">
+                <svg class="spinner" viewBox="25 25 50 50">
+                    <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <!--<div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>-->
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script src="_content/Microsoft.Authentication.WebAssembly.Msal/AuthenticationService.js"></script>
+    <script src="_content/MatBlazor/dist/matBlazor.js"></script>
+</body>
+
+</html>

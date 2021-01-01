@@ -1,0 +1,114 @@
+﻿@inherits LayoutComponentBase
+@using System.Diagnostics
+
+
+<MatAppBar Fixed="true">
+    <MatAppBarRow>
+
+        <MatAppBarSection>
+
+            <MatHidden BreakPoint="@MatBreakpoint.XS" Direction="@MatHiddenDirection.Down">
+                <MatAppBarTitle>
+                    <a href="/">
+                        <img style="position:relative;width:40px;height:40px;vertical-align:middle;"
+                             src="./assets/logo.png" />
+                    </a>
+
+                    Blazor Material Starter
+                </MatAppBarTitle>
+            </MatHidden>
+            <MatHidden BreakPoint="@MatBreakpoint.SM" Direction="@MatHiddenDirection.Up">
+                <MatIconButton Icon="menu" OnClick="@((e) => ButtonClicked())"></MatIconButton>
+                <MatAppBarTitle>Material Starter</MatAppBarTitle>
+            </MatHidden>
+        </MatAppBarSection>
+        <MatAppBarSection Align="@MatAppBarSectionAlign.End">
+
+
+            <MatHidden BreakPoint="@MatBreakpoint.XS" Direction="@MatHiddenDirection.Down">
+                <LoginDisplay />
+                <MatTooltip Tooltip="关于" Wrap="true">
+                    <MatIconButton Link="/about" Icon="info"></MatIconButton>
+                </MatTooltip>
+                <MatTooltip Tooltip="设置" Wrap="true">
+                    <MatIconButton Link="/settings" Icon="settings"></MatIconButton>
+                </MatTooltip>
+
+            </MatHidden>
+            <MatHidden BreakPoint="@MatBreakpoint.SM" Direction="@MatHiddenDirection.Up">
+                <MatIconButton Icon="more_vert" OnClick="@OpenSmallMenu" @ref="SmallMenuButton"></MatIconButton>
+                <MatMenu @ref="SmallMenu">
+
+                    <MatList>
+                        <MatListItem Href="/settings">
+                            设置
+                        </MatListItem>
+                    </MatList>
+                </MatMenu>
+
+            </MatHidden>
+        </MatAppBarSection>
+    </MatAppBarRow>
+</MatAppBar>
+
+<MatAppBarContent Style="width: 100vw; height: 100vh;">
+
+    <MatDrawer @bind-Opened="@Opened" Mode="@MatDrawerMode.Modal">
+
+        <MatNavMenu>
+            <MatNavItem Href="/about"><MatIcon Icon="plus_one"></MatIcon>&nbsp; 关于 </MatNavItem>
+            <MatDivider></MatDivider>
+            <MatNavItem Href="/cards"><MatIcon Icon="apps"></MatIcon>&nbsp; 卡片页面</MatNavItem>
+        </MatNavMenu>
+
+    </MatDrawer>
+
+    <MatDrawerContent Class="content-background">
+        <div class="content-container">
+            @Body
+        </div>
+    </MatDrawerContent>
+
+</MatAppBarContent>
+
+
+
+
+@code
+{
+
+
+    private bool Opened = false;
+
+    void ButtonClicked()
+    {
+        Opened = !Opened;
+    }
+
+    BaseMatIconButton PersonalButton;
+    BaseMatMenu PersonalMenu;
+
+    public void OpenPersonal(MouseEventArgs e)
+    {
+        this.PersonalMenu.OpenAsync(PersonalButton.Ref);
+    }
+
+
+    private bool DrawerOpened = false;
+
+    public void DrawerToggleClicked()
+    {
+        DrawerOpened = !DrawerOpened;
+    }
+
+    private BaseMatIconButton SmallMenuButton;
+    private BaseMatMenu SmallMenu;
+
+
+    public void OpenSmallMenu(MouseEventArgs e)
+    {
+        _ = this.SmallMenu.OpenAsync(SmallMenuButton.Ref);
+    }
+
+}
+

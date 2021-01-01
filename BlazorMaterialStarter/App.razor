@@ -1,0 +1,46 @@
+<MatThemeProvider Theme="@CurrentTheme">
+    <Router AppAssembly="@typeof(Program).Assembly">
+        <Found Context="routeData">
+            @* <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />*@
+            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+                <NotAuthorized>
+                    @if (!context.User.Identity.IsAuthenticated)
+                    {
+                        <RedirectToLogin />
+                    }
+                    else
+                    {
+                        <p>You are not authorized to access this resource.</p>
+                    }
+                </NotAuthorized>
+            </AuthorizeRouteView>
+        </Found>
+        <NotFound>
+            <LayoutView Layout="@typeof(MainLayout)">
+                <p>Sorry, there's nothing at this address.</p>
+            </LayoutView>
+        </NotFound>
+    </Router>
+</MatThemeProvider>
+
+@code
+{
+    [CascadingParameter]
+    public MatTheme CurrentTheme { get; set; }
+
+
+    protected override void OnInitialized()
+    {
+        CurrentTheme = new MatTheme
+        {
+            Primary = "#1a237e",
+            Secondary = "#0288d1",
+            Background = "#FFFFFF",
+            Surface = "#FFFFFF",
+            OnPrimary = "#FFFFFF",
+            OnSecondary = "#000000",
+            OnSurface = "#000000"
+        };
+    }
+
+}

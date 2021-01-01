@@ -1,0 +1,23 @@
+﻿@page "/counter"
+
+<MatHeadline1>Counter</MatHeadline1>
+
+<p>Current count: @currentCount</p>
+
+<MatIconButton Icon="add_circle_outline" @onclick="IncrementCount"></MatIconButton>
+<MatIconButton Icon="remove_circle_outline" @onclick="DecrementCount"></MatIconButton>
+
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+
+    private void DecrementCount()
+    {
+        currentCount--;
+    }
+}
