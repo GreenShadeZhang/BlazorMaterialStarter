@@ -2,8 +2,10 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +26,23 @@ namespace BlazorMaterialStarter
                 options.ProviderOptions.DefaultAccessTokenScopes.Add("openid");
                 options.ProviderOptions.DefaultAccessTokenScopes.Add("offline_access");
             });
-            await builder.Build().RunAsync();
+
+            builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+            var host = builder.Build();
+
+            var jsInterop = host.Services.GetRequiredService<IJSRuntime>();
+
+            var result = await jsInterop.InvokeAsync<string>("blazorCulture.get");
+
+            if (result != null)
+            {
+                var culture = new CultureInfo(result);
+                CultureInfo.DefaultThreadCurrentCulture = culture;
+                CultureInfo.DefaultThreadCurrentUICulture = culture;
+            }
+
+            await host.RunAsync();
         }
     }
 }

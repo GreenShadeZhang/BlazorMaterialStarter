@@ -1,7 +1,8 @@
 ﻿@page "/"
-
-<MatHeadline1>Cards</MatHeadline1>
-
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<Index> Localizer
+<MatHeadline1>@Localizer["Card"]</MatHeadline1>
+<CultureSelector />
 <div class="mat-layout-grid">
     <div class="mat-layout-grid-inner">
         <div class="mat-layout-grid-cell">
